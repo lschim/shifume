@@ -1,0 +1,30 @@
+mixin navlink(linkUrl, glyph, label)
+  li(class= 0 === url.indexOf(linkUrl) ? 'active' : null)
+    a(href=linkUrl)
+      i.glyphicon(class="glyphicon-#{glyph}")
+      = ' ' + label
+
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    title= pageTitle ? pageTitle + ' — ' + title : title
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet" href="/shifume.1.0.0.css")
+  body
+    .container
+      nav.navbar.navbar.navbar-inverse.navbar-static-top(role="navigation")
+        .navbar-header
+          a.navbar-brand(href="/")= title
+        ul.nav.navbar-nav
+          +navlink('/profile', 'user', 'Profile')
+        ul.nav.navbar-nav
+          +navlink('/tournament_creator', 'leaf', 'Create Tournament')
+
+        if loggedUserID
+          ul.nav.navbar-nav.navbar-right
+            +navlink('/login/logout', 'log-out', 'Déconnexion ' + loggedUserID)
+      p
+        include _flashes
+        block content
+    script(src="/main.js")

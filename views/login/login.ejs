@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login page</title>
+    <link rel='stylesheet' href='/css/style.css' />
+</head>
+<body>
+<% include ../error %>
+<form method="post">
+    <input type="text" name="userid" placeholder="Type your id" autofocus required<% if (userid) { %> value="<%= userid %>"<% } %>>
+    <input type="password" name="userpass" />
+    <input type="submit">
+</form>
+<a href="/login/createuser">Register</a>
+</body>
+</html>

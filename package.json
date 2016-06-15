@@ -1,0 +1,65 @@
+{
+  "name": "shifume",
+  "description": "Shifume tournaments",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "webpack",
+    "debug": "nodemon --debug boot.js",
+    "debug:client": "npm run build -- --watch",
+    "doc": "rimraf doc && groc",
+    "lint": "standard --verbose | snazzy",
+    "postinstall": "rimraf .jshintrc .jshintignore && npm run build",
+    "start": "node boot.js",
+    "test": "npm run lint",
+    "validate": "npm ls"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "stage-2"
+    ],
+    "plugins": [
+      "transform-class-properties",
+      "transform-decorators-legacy"
+    ]
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "ignore": [
+      "/doc/"
+    ]
+  },
+  "dependencies": {
+    "body-parser": "~1.13.2",
+    "bootstrap": "^3.3.6",
+    "colors": "^1.0.3",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "~1.3.5",
+    "cookie-session": "^2.0.0-alpha.1",
+    "express": "~4.13.1",
+    "jade": "^1.8.1",
+    "jquery": "^2.2.2",
+    "mongoose": "^4.3.7",
+    "morgan": "~1.6.1",
+    "serve-favicon": "~2.3.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.4.5",
+    "babel-eslint": "^4.1.8",
+    "babel-loader": "^6.2.2",
+    "babel-plugin-transform-class-properties": "^6.5.0",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-stage-2": "^6.5.0",
+    "hjs-webpack": "^7.2.0",
+    "webpack": "^1.12.14",
+    "nodemon": "^1.9.1",
+    "style-loader": "^0.13.0",
+    "stylus-loader": "^1.5.1",
+    "url-loader": "^0.5.7",
+    "postcss-loader": "^0.8.0",
+    "css-loader": "^0.23.1",
+    "file-loader": "^0.8.5"
+  }
+}

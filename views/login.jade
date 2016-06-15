@@ -1,0 +1,26 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    title= pageTitle ? pageTitle + ' — ' + title : title
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet" href="/shifume.1.0.0.css")
+  body
+
+    div.container
+      p
+        include _flashes
+      form.form-signin(method='post')
+        h2.form-signin-heading Please sign in
+        label.sr-only(for="inputUserId") Id
+        input#inputUserid.form-control(type="text", name="userid", placeholder="Id", required, autofocus)
+        label.sr-only(for="inputPassword") Password
+        input#inputPassword.form-control(type="password", name="password", placeholder="Password", required)
+        div.checkbox
+          label
+            input(type="checkbox", value="remember-me")
+            |Remember me
+        button#loginButton.btn.btn-lg.btn-primary.btn-block(type="submit") Sign in
+      form(action="/login/register")
+        button#registerButton.btn.btn-lg.btn-primary.btn-block(type="submit") Register
+
