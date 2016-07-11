@@ -24,3 +24,30 @@ html(lang="en")
       form(action="/login/register")
         button#registerButton.btn.btn-lg.btn-primary.btn-block(type="submit") Register
 
+div.text-center(style="padding:50px 0")
+  div.logo
+    |login
+  div.login-form-1
+      form#login-form.text-left
+      div.login-form-main-message
+      div.main-login-form
+        div.login-group
+          div.form-group
+            label.sr-only(for="lg_username")
+              |Username
+            input.form-control#lg_username(type="text", name="lg_username", placeholder="username")
+          div.form-group
+            label.sr-only(for="lg_password")
+              |Password
+            input.form-control#lg_password(type="password", name="lg_password", placeholder="password")
+          div.form-group.login-group-checkbox
+            input#lg_remember(type="checkbox", name="lg_remember")
+            label(for="lg_remember")
+              |remember
+        button.login-button(type="submit")
+          i.fa.fa-chevron-right
+      div.etc-login-form
+        p
+          |forgot your password? <a href="#">click here</a>
+        p
+          |new user? <a href="#">create new account</a>
