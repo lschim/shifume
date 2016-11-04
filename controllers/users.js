@@ -47,9 +47,7 @@ function setSequence (req, res) {
     res.redirect('/profile')
   })
   .catch((err) => {
-    console.log('TEEEST')
-    req.flash('info', 'SALE GROS')
-      //`Error setting sequence ${err.message}`)
+      // `Error setting sequence ${err.message}`)
     res.redirect('/profile')
   })
 }

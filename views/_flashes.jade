@@ -10,7 +10,6 @@
 //- Pour des raisons de CSS, on convertit le type `error` en `danger` afin de correspondre aux
 //- codes attendus par Bootstrap (`success`, `info`, `warning`… ont des classes CSS homonymes).
 p
-   |THE FLASH BOX
 each messages, kind in flash
   - if ('error' === kind) kind = 'danger'
   .alert(class="alert-#{kind}")
