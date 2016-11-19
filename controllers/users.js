@@ -47,7 +47,7 @@ function setSequence (req, res) {
     res.redirect('/profile')
   })
   .catch((err) => {
-      // `Error setting sequence ${err.message}`)
+    console.log('Error setting sequence ' + err)
     res.redirect('/profile')
   })
 }

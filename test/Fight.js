@@ -11,9 +11,11 @@ describe('Fight', function () {
   })
 })
 
-describe('Fight', function () {
-  it('PPPSSSRRR should win over RRRSSSRRR', function () {
-    const fight = new Fight()
-    return fight.startFight()
-  })
-})
+// describe('Fight', function () {
+//   it('PPPSSSRRR should win over RRRSSSRRR', function () {
+//     const fight = new Fight()
+//     fight.addPlayer('bobby')
+//     fight.addPlayer('billy')
+//     return fight.startFight().should.be.fulfilled.then(console.log)
+//   })
+// })

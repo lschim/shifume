@@ -1,8 +1,8 @@
 import mongoose, { Schema } from 'mongoose'
 
 const userSchema = new Schema({
-  _id: { type: String, required: true, unique: true },
-  password: {type: String, required: true},
+  _id: { type: String, required: true, unique: true }, // TODO require max size
+  password: {type: String, required: true}, // require max size
   joinedAt: { type: Date, default: Date.now },
   sequence: {type: String, default: ''}
 })
@@ -25,9 +25,22 @@ Object.assign(userSchema.statics, {
     return this.findById(id).exec().then(notEmpty)
   },
 
+  // Check that the user that was built matches an entry in mongo (i.e. password matches)
+  // TODO doesn't look secure you twat
   checkUserPassword (user) {
     return this.find(user).exec().then(notEmpty)
+  },
+
+  getSequence (id) {
+    console.log('getSequence called for ' + id)
+    return this.findById(id).exec().then((user) => {
+      console.log('Fulfilled')
+      return user.getSequence()
+    }).catch((err) => {
+      console.log('FUCKKKKK' + err)
+    })
   }
+
 })
 
 Object.assign(userSchema.methods, {
@@ -37,6 +50,10 @@ Object.assign(userSchema.methods, {
         return this.update({ $set: { sequence: sequence } }).exec()
       }
     )
+  },
+
+  getSequence () {
+    return this.sequence
   }
 })
 

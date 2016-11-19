@@ -6,12 +6,13 @@
   "scripts": {
     "build": "webpack",
     "debug": "nodemon --debug boot.js",
-    "debug:client": "npm run build -- --watch",
+    "debug:client": "npm run build --watch",
     "doc": "rimraf doc && groc",
     "lint": "standard --verbose | snazzy",
     "postinstall": "rimraf .jshintrc .jshintignore && npm run build",
     "start": "node boot.js",
-    "test": "mocha test/ --recursive --watch --compilers js:babel-register --require=mocha-mongoose-fix-overwitemodelerror",
+    "test": "mocha test/ --recursive --compilers js:babel-register",
+    "test:user": "mocha test/UserModel.js --recursive --compilers js:babel-register",
     "validate": "npm ls"
   },
   "babel": {
@@ -40,9 +41,10 @@
     "express": "~4.13.1",
     "jade": "^1.8.1",
     "jquery": "^2.2.2",
-    "mongoose": "^4.3.7",
+    "mongoose": "^4.6.6",
     "morgan": "~1.6.1",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "sinon": "^1.17.6"
   },
   "devDependencies": {
     "babel-core": "^6.4.5",
@@ -58,7 +60,6 @@
     "css-loader": "^0.23.1",
     "file-loader": "^0.8.5",
     "hjs-webpack": "^7.2.0",
-    "mocha-mongoose-fix-overwitemodelerror": "^1.0.0",
     "nodemon": "^1.9.1",
     "postcss-loader": "^0.8.0",
     "style-loader": "^0.13.0",
