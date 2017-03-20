@@ -3,7 +3,7 @@ import chaiAsPromised from 'chai-as-promised'
 import sinon from 'sinon'
 chai.use(chaiAsPromised)
 chai.should()
-import Fight, {FightState} from '../lib/tournament/Fight.js'
+import Fight, {FightState} from '../model/tournament/Fight.js'
 import User from '../model/user'
 
 describe('Fight', function () {

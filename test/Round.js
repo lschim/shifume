@@ -3,10 +3,9 @@ import chaiAsPromised from 'chai-as-promised'
 import sinon from 'sinon'
 chai.use(chaiAsPromised)
 chai.should()
-import Round from '../lib/tournament/Round.js'
-import {FightState} from '../lib/tournament/Fight.js'
+import Round from '../model/tournament/Round.js'
+import {FightState} from '../model/tournament/Fight.js'
 import User from '../model/user'
-
 
 describe('Round', function () {
   describe('weird case', function () {

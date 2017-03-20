@@ -1,4 +1,4 @@
-import User from '../../model/user'
+import User from '../user'
 
 export const FightState = {finished: 5, ready: 0, invalid: -5}
 
