@@ -1,8 +1,4 @@
-const chai = require('chai')
-const should = chai.should()
-const expect = chai.expect
-const assert = chai.assert
-import sinon from 'sinon'
+import chai, {expect} from 'chai'
 import User from '../model/user.js'
 
 const chaiAsPromised = require('chai-as-promised')
@@ -65,7 +61,7 @@ describe('User', function () {
     const newUser = new User({_id: 'Thomas', password: 'test'})
     newUser.sequence = 'SSSSSSSSSSSS'
     newUser.validate(function (err) {
-      assert.equal(err.errors['sequence'].message, 'Path `sequence` (`SSSSSSSSSSSS`) is longer than the maximum allowed length (10).')
+      expect(err.errors['sequence'].message).to.equal('Path `sequence` (`SSSSSSSSSSSS`) is longer than the maximum allowed length (10).')
       done()
     })
   })

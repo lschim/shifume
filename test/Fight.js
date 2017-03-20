@@ -1,23 +1,23 @@
-const chai = require('chai')
-const should = chai.should()
-const Fight = require('../lib/tournament/Fight.js')
-const chaiAsPromised = require('chai-as-promised')
-const sinon = require('sinon')
-import User from '../model/user'
+import chai from 'chai'
+import chaiAsPromised from 'chai-as-promised'
+import sinon from 'sinon'
 chai.use(chaiAsPromised)
+chai.should()
+import Fight, {FightState} from '../lib/tournament/Fight.js'
+import User from '../model/user'
 
 describe('Fight', function () {
-  describe('Fight status', function () {
+  describe('Fight state', function () {
     it('Cannot start a fight while there are strictly less than two players', function () {
       const fight = new Fight()
-      return fight.startFight().should.be.rejected
+      return fight.start().should.be.rejected
     })
 
     it('Fight is ready to start when there are two players', function () {
       const fight = new Fight()
       fight.addPlayer('player1')
       fight.addPlayer('player2')
-      return fight.state.should.equal(0)
+      return fight.state.should.equal(FightState.ready)
     })
   })
 
@@ -34,33 +34,36 @@ describe('Fight', function () {
       return fight
     }
 
+    after(function() {
+      stubGetSequence.restore()
+    })
     afterEach(function () {
       stubGetSequence.reset()
     })
 
     it('RRR wins against SSS', function () {
       const fight = fillFight('RRR', 'SSS')
-      return fight.startFight().should.eventually.equal('player1')
+      return fight.start().should.eventually.equal('player1')
     })
 
     it('RRPP wins against SSR', function () {
       const fight = fillFight('SSR', 'RRPP')
-      return fight.startFight().should.eventually.equal('player2')
+      return fight.start().should.eventually.equal('player2')
     })
 
     it('P wins against R', function () {
       const fight = fillFight('P', 'R')
-      return fight.startFight().should.eventually.equal('player1')
+      return fight.start().should.eventually.equal('player1')
     })
 
     it('R wins against S', function () {
       const fight = fillFight('R', 'S')
-      return fight.startFight().should.eventually.equal('player1')
+      return fight.start().should.eventually.equal('player1')
     })
 
     it('S wins against P', function () {
       const fight = fillFight('P', 'S')
-      return fight.startFight().should.eventually.equal('player2')
+      return fight.start().should.eventually.equal('player2')
     })
   })
 })
