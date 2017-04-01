@@ -1,2 +1,7 @@
 node_modules/
 public/main.js
+doc/
+.DS_Store
+draft.rtf
+tocheck.rtf
+todo.rtf
