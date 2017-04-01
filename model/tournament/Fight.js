@@ -62,7 +62,7 @@ Fight.prototype.start = function () {
       return Promise.resolve(this.winner)
     }
   }
-  console.log('Starting fight')
+  console.log('Starting fight ' + this.p1 + ' vs ' + this.p2)
 
   return Promise.all([User.getSequence(this.p1), User.getSequence(this.p2)]).then((values) => {
     const [score1, score2] = confrontSequences(values[0], values[1], this.winCondition)

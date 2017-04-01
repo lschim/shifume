@@ -41,7 +41,8 @@ function loadUser (req, res, next) {
 function setSequence (req, res) {
   const sequence = req.body.sequence
   console.log('SETSEQUENCE : ' + sequence)
-  return req.loggedUser.setSequence(sequence).then(() => {
+  req.loggedUser.sequence = sequence
+  req.loggedUser.save().then(() => {
     console.log('SEQUENCE SET TO ' + sequence)
     req.flash('info', 'New sequence set, ready to kick asses')
     res.redirect('/profile')

@@ -1,6 +1,7 @@
 import chai, {expect} from 'chai'
 import User from '../model/user.js'
-
+import mongoose from 'mongoose'
+mongoose.Promise = global.Promise
 const chaiAsPromised = require('chai-as-promised')
 chai.use(chaiAsPromised)
 

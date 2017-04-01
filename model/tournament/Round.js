@@ -8,21 +8,21 @@ function Round (participants = []) {
 function generateFights (participants) {
   const fights = []
   if (participants.length > 0) {
-    console.log(Fight)
     let fight = new Fight()
-    fights.push(fight)
     for (let i = 0; i < participants.length; i++) {
-      fight.addPlayer(participants[i])
       if (fight.state === FightState.ready) {
-        fight = new Fight()
         fights.push(fight)
+        fight = new Fight()
       }
+      fight.addPlayer(participants[i])
     }
+    fights.push(fight)
   }
   console.log('Round : created ' + fights.length + ' fights')
   return fights
 }
 
+//Probably not needed
 Round.prototype.remainingFights = function () {
   let cpt = 0
   this.fights.forEach((fight) => {

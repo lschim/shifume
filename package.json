@@ -11,7 +11,7 @@
     "lint": "standard --verbose | snazzy",
     "postinstall": "rimraf .jshintrc .jshintignore && npm run build",
     "start": "node boot.js",
-    "test": "mocha test/ --recursive --compilers js:babel-register",
+    "test": "mocha test/ --recursive --compilers js:babel-register --trace-deprecation",
     "test:user": "mocha test/UserModel.js --recursive --compilers js:babel-register",
     "validate": "npm ls"
   },
@@ -41,7 +41,7 @@
     "express": "~4.13.1",
     "jade": "^1.8.1",
     "jquery": "^2.2.2",
-    "mongoose": "^4.8.6",
+    "mongoose": "^4.9.1",
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0",
     "sinon": "^1.17.6"

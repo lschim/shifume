@@ -38,8 +38,6 @@ app.use((req, res, next) => {
   res.locals.url = req.url
   res.locals.loggedUserID = req.session.loggedUserID
   next()
-  console.log(res.locals.flash)
-  console.log('FOR URL'+res.locals.url)
 })
 
 app.use('/login', login)

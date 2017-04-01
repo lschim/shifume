@@ -8,10 +8,10 @@ import User from '../model/user'
 
 describe('Fight', function () {
   describe('Fight state', function () {
-    it('Cannot start a fight while there are strictly less than two players', function () {
+    it('Cannot start a fight while there are strictly less than two players', sinon.test(function () {
       const fight = new Fight()
       return fight.start().should.be.rejected
-    })
+    }))
 
     it('Fight is ready to start when there are two players', function () {
       const fight = new Fight()
@@ -22,7 +22,13 @@ describe('Fight', function () {
   })
 
   describe('Fight outcome', function () {
-    const stubGetSequence = sinon.stub(User, 'getSequence')
+    let stubGetSequence
+    beforeEach(function () {
+      stubGetSequence = sinon.stub(User, 'getSequence')
+    })
+    afterEach(function () {
+      stubGetSequence.restore()
+    })
 
     function fillFight (sequence1, sequence2) {
       stubGetSequence.onCall('0').returns(sequence1)
@@ -33,13 +39,6 @@ describe('Fight', function () {
       fight.addPlayer('player2')
       return fight
     }
-
-    after(function() {
-      stubGetSequence.restore()
-    })
-    afterEach(function () {
-      stubGetSequence.reset()
-    })
 
     it('RRR wins against SSS', function () {
       const fight = fillFight('RRR', 'SSS')

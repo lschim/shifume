@@ -19,15 +19,42 @@ describe('Round', function () {
       round.remainingFights().should.equal(1)
     })
 
-    it('cannot generate next round while there is one fight not in finished state', function () {
+    it('cannot generate next round while there is at least one fight not in finished state', function () {
       const round = new Round(['thomas'])
       round.generateNextRound.should.throw(Error)
     })
   })
 
   describe('correct use', function () {
+    function populate (count) {
+      const res = []
+      for (let i = 0; i < count; i++) {
+        res.push(i.toString())
+      }
+      return res
+    }
+
+    it('generates 2 fights when there are 4 participants', function () {
+      let round = new Round(populate(4))
+      round.fights.length.should.equal(2)
+      round.remainingFights().should.equal(2)
+    })
+
+    it('generates 5 fights when there are 10 participants', function () {
+      let round = new Round(populate(10))
+      round.fights.length.should.equal(5)
+      round.remainingFights().should.equal(5)
+    })
+
+    it('generates 5 fights when there are 9 participants', function () {
+      let round = new Round(populate(9))
+      round.fights.length.should.equal(5)
+      round.remainingFights().should.equal(5)
+    })
+
     it('can generate next round when there are no fights not in finished state', function () {
       let round = new Round(['thomas', 'henri', 'kevin', 'louis', 'hugu'])
+      round.fights.length.should.equal(3)
       round.fights = round.fights.map((fight) => {
         fight.state = FightState.finished
         fight.winner = fight.p1
