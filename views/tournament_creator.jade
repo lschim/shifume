@@ -2,12 +2,15 @@ extends _layout
 
 block content
   h1|Create a tournament
+  div
+    label(for="tournamentName") Tournament Name
+    input#tournamentName(type="text", placeholder="Name")
+  div
+    label(for="searchUser") Participants
+    input#participantSearcher(type="text", placeholder="Search participant")
+    button#participantAdder(value="Add") Add
     div
-      label(for="tournamentName") Tournament Name
-      input#tournamentName(type="text", placeholder="Name")
-    div
-      label(for="searchUser") Participants
-      input#participantSearcher(type="text", placeholder="Search participant")
-      button#participantAdder(value="Add")
+
+
 
 
