@@ -6,9 +6,8 @@ function initSequence () {
   var sequence_index = 0 // Next sequence to fill
 
   $.get('/user/get_sequence').then((res) => {
-    var sequence_str = res.data.sequence
-    if (sequence_str) {
-      sequence_str.split[''].forEach((move) =>
+    if (res) {
+      res.split('').forEach((move) =>
         add_move(move, false)
       )
     }
