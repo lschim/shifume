@@ -2,14 +2,23 @@ extends _layout
 
 block content
   h1|Create a tournament
-  div
+  br
+  p
     label(for="tournamentName") Tournament Name
     input#tournamentName(type="text", placeholder="Name")
-  div
+  p
     label(for="searchUser") Participants
-    input#participantSearcher(type="text", placeholder="Search participant")
-    button#participantAdder(value="Add") Add
-    div
+    div.container-fluid
+      div.row#participantList
+        div.col-md-2#participantAdder
+          div
+            div#participantAdderBtn Add participant
+            div#participantSearcherContainer
+              select#participantSearcher(style="display : none;width: 100%;", disabled='disabled')
+                option
+  p
+    input#tournamentCreator.login.loginmodal-submit(type="submit", name="Create Tournament", value="Create Tournament")
+
 
 
 
