@@ -3,7 +3,8 @@ import 'select2'
 import 'select2/dist/css/select2.css'
 
 $(initTournamentCreator)
-//TODO Unicité des participants et unicité du nom du tournoi
+// TODO Unicité des participants
+// Unicité du nom du tournoi
 function initTournamentCreator () {
   $('.select2-enable').select2()
 
@@ -19,64 +20,6 @@ function initTournamentCreator () {
     }
   })
 
-  function addAutoCompleteForParticipantSearcher () {
-    const data = [{id: 0, text: 'bob'}, {id: 1, text: 'thomas'}]
-    participantSearcherSelect2 = $participantSearcher.select2({
-      placeholder: 'Search participant',
-      data: data})
-    participantSearcherSelect2.select2('open')
-    // {
-    //   ajax: {
-    //     url: "https://api.github.com/search/repositories",
-    //     dataType: 'json',
-    //     delay: 250,
-    //     data: function (params) {
-    //       return {
-    //         q: params.term, // search term
-    //         page: params.page
-    //       }
-    //     },
-    //     processResults: function (data, params) {
-    //       // parse the results into the format expected by Select2
-    //       // since we are using custom formatting functions we do not need to
-    //       // alter the remote JSON data, except to indicate that infinite
-    //       // scrolling can be used
-    //       params.page = params.page || 1
-
-    //       return {
-    //         results: data.items,
-    //         pagination: {
-    //           more: (params.page * 30) < data.total_count
-    //         }
-    //       }
-    //     },
-    //     cache: true
-    //   },
-    //   escapeMarkup: function (markup) { return markup }, // let our custom formatter work
-    //   minimumInputLength: 1
-    // }
-  }
-
-  // Add the listeners that triggers participantSearcher (send the input value as a participant)
-  function addListenersToParticipantSearcher () {
-    // If user presses enter in the searcher
-    // $participantSearcher.on('keypress', function (e) {
-    //   if (e.which === 13) {
-    //     participantSearcherTriggered()
-    //   }
-    // })
-    $participantSearcher.on('select2:select', function (e) {
-      participantSearcherTriggered(e.params.data.text)
-    })
-    // TODO : if the user clicks on autocomplete value
-  }
-
-  function activateParticipantSearcher () {
-    $participantSearcher.removeAttr('disabled')
-    $participantSearcherContainer.show()
-    addAutoCompleteForParticipantSearcher()
-  }
-
   function participantSearcherTriggered (participantToAdd) {
     $participantSearcher.attr('disabled', 'disabled')
     addParticipant(participantToAdd)
@@ -85,6 +28,48 @@ function initTournamentCreator () {
     $('#participantAdderBtn').show()
   }
 
+  function addAutoCompleteForParticipantSearcher () {
+    participantSearcherSelect2 = $participantSearcher.select2({
+      placeholder: 'Search participant',
+      ajax: {
+        url: '/user/search', //TODO add parameter for the search
+        dataType: 'json',
+        delay: 250,
+        processResults: function (data, params) {
+          params.page = params.page || 1
+          data.forEach((item, index) => {
+            item.id = index
+            item.text = item._id
+          })
+          return {
+            results: data,
+            pagination: {
+              more: (params.page * 30) < data.length
+            }
+          }
+        },
+        cache: false
+      },
+      escapeMarkup: function (markup) { return markup }, // let our custom formatter work
+      minimumInputLength: 1})
+    participantSearcherSelect2.select2('open')
+  }
+
+  // Add the listeners that triggers participantSearcher (send the input value as a participant)
+  function addListenersToParticipantSearcher () {
+    $participantSearcher.on('select2:select', function (e) {
+      participantSearcherTriggered(e.params.data.text)
+    })
+  }
+
+  // Shows and activate the select to pick a participant
+  function activateParticipantSearcher () {
+    $participantSearcher.removeAttr('disabled')
+    $participantSearcherContainer.show()
+    addAutoCompleteForParticipantSearcher()
+  }
+
+  // Add a participant to the list
   function addParticipant (participant) {
     if (participant) {
       let $participantToAdd = $('<div>' + participant + '</div>').attr('class', 'col-md-2 participant-icon')

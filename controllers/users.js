@@ -4,10 +4,20 @@ const router = new Router()
 
 router.get('/:userid/exist', userExist)
 router.get('/:userid/get_sequence', getSequenceExternalUser)
-router.use(loadUser) // All the following routers will contain
+router.get('/search', searchUsers)
+router.use(loadUser) // All the following routers will contain the logged user
 router.post('/set_sequence', setSequence)
 router.get('/get_sequence', getSequence)
 
+function searchUsers (req, res, next) {
+  const regex = '/.*' + req.query.term + '.*/i'
+  User.find({_id: new RegExp(req.query.term, 'i')}, '_id sequence joinedAt').exec()
+    .then((users) => res.json(users))
+    .catch((err) => {
+      res.status = 500
+      res.json(err)
+    })
+}
 /**
  * Returns the sequence of the user with id userid in params of the request
  * @param  {Request}   req
@@ -40,10 +50,8 @@ function loadUser (req, res, next) {
 
 function setSequence (req, res) {
   const sequence = req.body.sequence
-  console.log('SETSEQUENCE : ' + sequence)
   req.loggedUser.sequence = sequence
   req.loggedUser.save().then(() => {
-    console.log('SEQUENCE SET TO ' + sequence)
     req.flash('info', 'New sequence set, ready to kick asses')
     res.redirect('/profile')
   })

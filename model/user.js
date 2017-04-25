@@ -2,7 +2,7 @@ import mongoose, { Schema } from 'mongoose'
 
 const userSchema = new Schema({
   _id: { type: String, required: true, unique: true },
-  password: {type: String, required: true}, // TODO to replace
+  password: {type: String, required: true, select: false}, // TODO to replace
   joinedAt: {type: Date, default: Date.now},
   sequence: {type: String, default: 'R', required: true, maxlength: 10, minlength: 1, trim: true, match: /^[RSP]+$/}
 })
