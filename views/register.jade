@@ -4,12 +4,10 @@ html(lang="en")
     meta(charset="utf-8")
     title= pageTitle ? pageTitle + ' — ' + title : title
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
-    link(rel="stylesheet" href="/shifume.1.0.0.css")
   body
 
     div.container
       p
-        include _flashes
       form.form-signin(method='post')
         h2.form-signin-heading Register
         label.sr-only(for="inputUserId") Id

@@ -4,7 +4,6 @@ html(lang="en")
     meta(charset="utf-8")
     title= pageTitle ? pageTitle + ' — ' + title : title
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
-    link(rel="stylesheet" href="/shifume.1.0.0.css")
   body
 
     div.modal.fade#login-modal(tab-index="-1", role="dialog")
@@ -15,3 +14,4 @@ html(lang="en")
           input(type="text", name="userid", placeholder="Username", required, autofocus)
           input(type="password", name="password", placeholder="Password", required)
           input.login.loginmodal-submit(type="submit", name="login", value="login")
+        a(href="./login/register") Register
