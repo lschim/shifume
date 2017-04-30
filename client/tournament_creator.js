@@ -5,6 +5,7 @@ import 'select2/dist/css/select2.css'
 $(initTournamentCreator)
 // TODO Unicité des participants
 // Unicité du nom du tournoi
+
 function initTournamentCreator () {
   $('.select2-enable').select2()
 
@@ -12,6 +13,7 @@ function initTournamentCreator () {
   let $participantSearcherContainer = $('#participantSearcherContainer')
   let participantSearcherSelect2
   addListenersToParticipantSearcher()
+  addListenersTournamentCreator()
 
   $('#participantAdder').on('click', function () {
     $('#participantAdderBtn').hide()
@@ -78,5 +80,39 @@ function initTournamentCreator () {
       })
       $('#participantList').append($participantToAdd)
     }
+  }
+
+  function addListenersTournamentCreator () {
+    const tournamentCreator = $('#tournamentCreator')
+    tournamentCreator.on('click', function () {
+      // Gather the participants
+      // TODO This is a draft because I'm in the plane without doc. Embelish the loop !!
+      const participants = []
+
+      let e = $('.participant-icon')
+      for (let i = 0; i < e.length; i++) {
+        participants.push(e[i].innerText)
+      }
+      //.forEach((e) => { participants.push(e.innerText) })
+      // for (let e = $('.participant-icon'); e !== null && e !== undefined; e = e.nextElementSibling) {
+      //   participants.push(e.innerText)
+      // }
+      console.log(participants)
+      // TODO : Ajax the request
+      // $.ajax({
+      //   type: 'POST',
+      //   url: '/user/set_sequence',
+      //   data: {sequence: sequence.join('')},
+      //   dataType: 'json',
+      //   success: function (data, textStatus) {
+      //     if (data.redirect) {
+      //       // data.redirect contains the string URL to redirect to
+      //       window.location.href = data.redirect
+      //     } else {
+      //       hide_selectors()
+      //     }
+      //   }
+      // })
+    })
   }
 }
