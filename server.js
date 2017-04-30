@@ -10,7 +10,7 @@ import db from './model/connection'
 
 import login, {requireLogin} from './controllers/login'
 
-import mainController from './controllers/main'
+import mainController from './controllers/view'
 import userController from './controllers/users'
 
 const app = express()
