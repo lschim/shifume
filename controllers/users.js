@@ -10,7 +10,6 @@ router.post('/set_sequence', setSequence)
 router.get('/get_sequence', getSequence)
 
 function searchUsers (req, res, next) {
-  const regex = '/.*' + req.query.term + '.*/i'
   User.find({_id: new RegExp(req.query.term, 'i')}, '_id sequence joinedAt').exec()
     .then((users) => res.json(users))
     .catch((err) => {
