@@ -6,7 +6,9 @@ const tournamentSchema = new Schema({
   created: {type: Date, default: Date.now},
   rounds: {type: Array},
   participants: {type: Array, required: true},
-  state: {type: Number, default: TournamentState.ready}
+  state: {type: Number, default: TournamentState.ready},
+  name: {type: String, required: true},
+  admins: {type: Array, required: true}
 })
 
 Object.assign(tournamentSchema.methods, {
