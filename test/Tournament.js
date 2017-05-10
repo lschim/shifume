@@ -13,9 +13,7 @@ describe('Tournament', function () {
     it('Can create a tournament with 4 participants and finish it', sinon.test(function (done) {
       const getSequenceStub = this.stub(User, 'getSequence') // Cleaned automatically by sinon
       const tournament = new Tournament({participants: ['Kevin', 'Louis', 'Bob', 'Henry'], admins:['Amin'], name: 'T1'})
-      tournament.validate().catch((err) => {
-        done(err)
-      })
+      tournament.validate().should.be.fulfilled
       .then(() => {
         console.log(tournament)
         getSequenceStub.withArgs('Kevin').returns('RRR')
@@ -34,8 +32,7 @@ describe('Tournament', function () {
             done()
           })
         })
-      })
-
+      }).should.notify(done)
     }))
   })
 })
