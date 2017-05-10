@@ -12,6 +12,7 @@ import login, {requireLogin} from './controllers/login'
 
 import mainController from './controllers/view'
 import userController from './controllers/users'
+import tournamentController from './controllers/tournament'
 
 const app = express()
 const server = createServer(app)
@@ -44,6 +45,7 @@ app.use('/login', login)
 app.use(requireLogin)
 app.use(mainController)
 app.use('/user', userController)
+app.use('/tournament', tournamentController)
 
 db(() => {
   server.listen(app.get('port'), () => {

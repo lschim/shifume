@@ -93,26 +93,19 @@ function initTournamentCreator () {
       for (let i = 0; i < e.length; i++) {
         participants.push(e[i].innerText)
       }
-      //.forEach((e) => { participants.push(e.innerText) })
-      // for (let e = $('.participant-icon'); e !== null && e !== undefined; e = e.nextElementSibling) {
-      //   participants.push(e.innerText)
-      // }
+      const name = $('#tournamentName').val()
+      console.log('name : ' + name)
       console.log(participants)
       // TODO : Ajax the request
-      // $.ajax({
-      //   type: 'POST',
-      //   url: '/user/set_sequence',
-      //   data: {sequence: sequence.join('')},
-      //   dataType: 'json',
-      //   success: function (data, textStatus) {
-      //     if (data.redirect) {
-      //       // data.redirect contains the string URL to redirect to
-      //       window.location.href = data.redirect
-      //     } else {
-      //       hide_selectors()
-      //     }
-      //   }
-      // })
+      $.ajax({
+        type: 'POST',
+        url: '/tournament/create',
+        data: {name: name, participants: participants},
+        dataType: 'json',
+        success: function (data, textStatus) {
+          //TODO redirect on the page of the tournament
+        }
+      })
     })
   }
 }
