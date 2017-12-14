@@ -18,6 +18,8 @@ html(lang="en")
         ul.nav.navbar-nav
           +navlink('/profile', 'user', 'Profile')
         ul.nav.navbar-nav
+          +navlink('/tournament', 'grain', 'View Tournament')
+        ul.nav.navbar-nav
           +navlink('/tournament_creator', 'leaf', 'Create Tournament')
 
         if loggedUserID
